@@ -1,0 +1,413 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+
+import DecoracoesCantos from "../DecoracoesCantos";
+
+type Props = {
+  onVoltar: () => void;
+  onContinuar: () => void;
+};
+
+export default function NovaSenha({
+  onVoltar,
+  onContinuar,
+}: Props) {
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false);
+
+  return (
+    <View style={styles.container}>
+      <DecoracoesCantos tela="login" />
+
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.conteudo}>
+
+          {/* BOTÃO VOLTAR */}
+          <TouchableOpacity
+            style={styles.botaoVoltar}
+            onPress={onVoltar}
+          >
+            <Text style={styles.setaVoltar}>←</Text>
+            <Text style={styles.textoVoltar}>Voltar</Text>
+          </TouchableOpacity>
+
+          {/* TÍTULO */}
+          <View style={styles.tituloArea}>
+            <Text style={styles.titulo}>
+              Criar nova
+            </Text>
+
+            <Text style={styles.tituloVermelho}>
+              senha
+            </Text>
+
+            <Text style={styles.subtitulo}>
+              Crie uma nova senha segura para
+              proteger sua conta.
+            </Text>
+          </View>
+
+          {/* CARD */}
+          <View style={styles.card}>
+
+            {/* DETALHES */}
+            <View style={styles.detalheAmarelo} />
+            <View style={styles.detalheVermelho} />
+
+            {/* ÍCONE */}
+            <View style={styles.iconeCirculo}>
+              <Text style={styles.icone}>
+                🔒
+              </Text>
+            </View>
+
+            <Text style={styles.pergunta}>
+              Nova senha
+            </Text>
+
+            <Text style={styles.explicacao}>
+              Digite sua nova senha e confirme
+              no campo abaixo.
+            </Text>
+
+            {/* NOVA SENHA */}
+            <Text style={styles.label}>
+              Nova senha
+            </Text>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputIcone}>
+                🔒
+              </Text>
+
+              <TextInput
+                style={styles.input}
+                placeholder="Digite sua nova senha"
+                placeholderTextColor="#9BA8B5"
+                secureTextEntry={!mostrarSenha}
+              />
+
+              <TouchableOpacity
+                onPress={() =>
+                  setMostrarSenha(!mostrarSenha)
+                }
+              >
+                <Text style={styles.olho}>
+                  {mostrarSenha ? "👁" : "◉"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* CONFIRMAR SENHA */}
+            <Text style={styles.label}>
+              Confirmar nova senha
+            </Text>
+
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputIcone}>
+                🔒
+              </Text>
+
+              <TextInput
+                style={styles.input}
+                placeholder="Digite a senha novamente"
+                placeholderTextColor="#9BA8B5"
+                secureTextEntry={!mostrarConfirmacao}
+              />
+
+              <TouchableOpacity
+                onPress={() =>
+                  setMostrarConfirmacao(
+                    !mostrarConfirmacao
+                  )
+                }
+              >
+                <Text style={styles.olho}>
+                  {mostrarConfirmacao ? "👁" : "◉"}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* DICA DE SENHA */}
+            <View style={styles.dica}>
+              <Text style={styles.dicaIcone}>
+                💡
+              </Text>
+
+              <Text style={styles.dicaTexto}>
+                Use pelo menos 8 caracteres, misturando
+                letras, números e símbolos.
+              </Text>
+            </View>
+
+            {/* BOTÃO SALVAR */}
+            <TouchableOpacity
+              style={styles.botaoSalvar}
+              onPress={onContinuar}
+            >
+              <Text style={styles.textoBotao}>
+                Salvar nova senha
+              </Text>
+
+              <View style={styles.circuloSeta}>
+                <Text style={styles.seta}>
+                  →
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+          </View>
+
+          {/* RODAPÉ */}
+          <Text style={styles.rodape}>
+            Sua segurança é importante para nós. 💙
+          </Text>
+
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+
+  scroll: {
+    flexGrow: 1,
+    paddingHorizontal: 25,
+    paddingVertical: 30,
+  },
+
+  conteudo: {
+    width: "100%",
+    maxWidth: 500,
+    alignSelf: "center",
+    zIndex: 2,
+  },
+
+  botaoVoltar: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 15,
+    marginBottom: 25,
+  },
+
+  setaVoltar: {
+    fontSize: 27,
+    color: "#17365F",
+    marginRight: 7,
+    fontWeight: "600",
+  },
+
+  textoVoltar: {
+    fontSize: 14,
+    color: "#17365F",
+    fontWeight: "700",
+  },
+
+  tituloArea: {
+    alignItems: "center",
+    marginBottom: 28,
+  },
+
+  titulo: {
+    fontSize: 31,
+    fontWeight: "800",
+    color: "#17365F",
+  },
+
+  tituloVermelho: {
+    fontFamily: "Britini",
+    fontSize: 48,
+    color: "#D92B2B",
+    marginTop: -8,
+  },
+
+  subtitulo: {
+    fontSize: 14,
+    color: "#667788",
+    textAlign: "center",
+    lineHeight: 21,
+    marginTop: 7,
+    maxWidth: 350,
+  },
+
+  card: {
+    backgroundColor: "#F2F7FC",
+    borderRadius: 28,
+    padding: 25,
+    paddingTop: 30,
+    overflow: "hidden",
+
+    shadowColor: "#17365F",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+
+    elevation: 5,
+  },
+
+  detalheAmarelo: {
+    position: "absolute",
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#F5B719",
+    right: -17,
+    top: -17,
+  },
+
+  detalheVermelho: {
+    position: "absolute",
+    width: 27,
+    height: 27,
+    borderRadius: 14,
+    backgroundColor: "#D92B2B",
+    left: -10,
+    bottom: 80,
+  },
+
+  iconeCirculo: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: "#FFFFFF",
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 18,
+  },
+
+  icone: {
+    fontSize: 30,
+  },
+
+  pergunta: {
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: "800",
+    color: "#17365F",
+    marginBottom: 8,
+  },
+
+  explicacao: {
+    textAlign: "center",
+    color: "#71808E",
+    fontSize: 13,
+    lineHeight: 19,
+    marginBottom: 20,
+  },
+
+  label: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#17365F",
+    marginBottom: 7,
+    marginTop: 5,
+  },
+
+  inputContainer: {
+    height: 54,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: "#D8E5F0",
+    marginBottom: 17,
+  },
+
+  inputIcone: {
+    fontSize: 17,
+    marginRight: 10,
+  },
+
+  input: {
+    flex: 1,
+    height: "100%",
+    fontSize: 14,
+    color: "#17365F",
+  },
+
+  olho: {
+    fontSize: 17,
+    paddingLeft: 8,
+  },
+
+  dica: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 15,
+    padding: 13,
+    marginBottom: 20,
+  },
+
+  dicaIcone: {
+    fontSize: 18,
+    marginRight: 9,
+  },
+
+  dicaTexto: {
+    flex: 1,
+    fontSize: 12,
+    color: "#71808E",
+    lineHeight: 18,
+  },
+
+  botaoSalvar: {
+    height: 55,
+    borderRadius: 17,
+    backgroundColor: "#F5B719",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  textoBotao: {
+    color: "#17365F",
+    fontSize: 16,
+    fontWeight: "800",
+  },
+
+  circuloSeta: {
+    position: "absolute",
+    right: 13,
+    width: 35,
+    height: 35,
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  seta: {
+    color: "#17365F",
+    fontSize: 22,
+    fontWeight: "700",
+  },
+
+  rodape: {
+    textAlign: "center",
+    color: "#17365F",
+    fontSize: 13,
+    marginTop: 25,
+  },
+});
